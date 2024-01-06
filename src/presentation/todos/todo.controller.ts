@@ -47,12 +47,11 @@ export class TodosController {
         });
 
         if( !todo ) return res.status(400).json({ error: `Todo with id: ${ id } not found.` });
-        
-          
+    
         const updateTodo = await prisma.todo.update({
             where: { id },
             data: updateTodoDto!.values,
-        })
+        });
 
         res.json( updateTodo );
     }
@@ -70,7 +69,7 @@ export class TodosController {
         
         const deleted = await prisma.todo.delete({
             where: { id }
-        })
+        });
 
         deleted ? res.json( deleted ) : res.status(400).json({ error: `Todo with id ${ id } not found.` })
     }
